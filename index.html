@@ -1077,24 +1077,91 @@
   </section>
 
   <script>
-    document.querySelector("form").addEventListener("submit", function (e) {
+  // --- Form submit safe guard (hanya kalau ada form) ---
+  const form = document.querySelector("form");
+  if (form) {
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
       alert("Terima kasih! Pesan Anda telah dikirim.");
       this.reset();
     });
-    const track = document.getElementById('programTrack');
-    const cards = [...track.children]; // ambil semua card
-    cards.forEach(card => {
-        const clone = card.cloneNode(true);
-        track.appendChild(clone);
+  }
+
+  // --- Duplicate program cards (aman) ---
+  const track = document.getElementById("programTrack");
+  if (track) {
+    const cards = [...track.children];
+    cards.forEach((card) => {
+      const clone = card.cloneNode(true);
+      track.appendChild(clone);
+    });
+  }
+
+  // --- Hamburger menu: aman (cek element dulu) ---
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+
+  if (menuToggle && navMenu) {
+    // buat tombol bisa ditekan dengan keyboard (aksesibilitas)
+    menuToggle.setAttribute("role", menuToggle.getAttribute("role") || "button");
+    menuToggle.setAttribute("tabindex", menuToggle.getAttribute("tabindex") || "0");
+    menuToggle.setAttribute(
+      "aria-controls",
+      menuToggle.getAttribute("aria-controls") || "navMenu"
+    );
+    menuToggle.setAttribute(
+      "aria-expanded",
+      menuToggle.getAttribute("aria-expanded") || "false"
+    );
+
+    const toggleMenu = () => {
+      const isActive = navMenu.classList.toggle("active");
+      menuToggle.setAttribute("aria-expanded", String(isActive));
+      menuToggle.classList.toggle("open", isActive);
+    };
+
+    menuToggle.addEventListener("click", toggleMenu);
+
+    // keyboard support: Space & Enter toggle
+    menuToggle.addEventListener("keydown", (e) => {
+      if (e.key === " " || e.key === "Enter") {
+        e.preventDefault();
+        toggleMenu();
+      }
     });
 
-    const menuToggle = document.getElementById("menuToggle");
-    const navMenu = document.getElementById("navMenu");
-
-    menuToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
+    // close menu when a nav link is clicked (mobile usability)
+    navMenu.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.classList.remove("open");
+      });
     });
-  </script>
+
+    // close on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        navMenu.classList.remove("active");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.classList.remove("open");
+      }
+    });
+  }
+
+  // --- Smooth scroll untuk semua link anchor ---
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      const targetId = this.getAttribute("href");
+      if (targetId.length > 1) {
+        e.preventDefault();
+        const target = document.querySelector(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    });
+  });
+</script>
 </body>
 </html>
