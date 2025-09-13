@@ -461,24 +461,72 @@
       color: white;
       margin-top: 30px;
     }
+  
+  /* Tambahan untuk hamburger */
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    .menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background: white;
+        border-radius: 2px;
+        transition: 0.3s;
+    }  
 
   @media (max-width: 768px) {
     /* Header */
     header {
-        flex-wrap: wrap;
-        padding: 12px 20px;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
     }
 
     header .logo img {
         height: 50px;
     }
 
-    header nav ul {
+    /* Tombol Hamburger */
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 6px;
+        cursor: pointer;
+    }
+
+    .menu-toggle span {
+        width: 28px;
+        height: 3px;
+        background: #fff; /* warna garis hamburger */
+        border-radius: 2px;
+        transition: 0.3s;
+    }
+
+    /* Nav default disembunyikan */
+    nav {
+        display: none;
+        width: 100%;
+    }
+
+    nav.active {
+        display: block; /* tampil saat ditekan */
+    }
+
+    nav ul {
         flex-direction: column;
         gap: 12px;
         width: 100%;
         text-align: center;
         margin-top: 10px;
+        background: #009688; /* warna tosca */
+        padding: 15px 0;
+        border-radius: 8px;
     }
 
     /* Hero */
@@ -570,17 +618,25 @@
   <!-- HEADER -->
   <header>
     <div class="logo">
-      <img src="logoEpsilon.jpg" alt="Epsilon Happy Bimbel Logo">
+        <img src="logoEpsilon.jpg" alt="Epsilon Happy Bimbel Logo">
     </div>
-    <nav>
-      <ul>
+
+    <!-- Tombol hamburger -->
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <nav id="navMenu">
+        <ul>
         <li><a href="#tentang">Tentang</a></li>
         <li><a href="#program">Program</a></li>
         <li><a href="#lokasi">Lokasi</a></li>
         <li><a href="#keuntungan">Keuntungan</a></li>
         <li><a href="#tim">Tim</a></li>
         <li><a href="#hubungi">Hubungi Kami</a></li>
-      </ul>
+        </ul>
     </nav>
   </header>
 
@@ -1031,6 +1087,13 @@
     cards.forEach(card => {
         const clone = card.cloneNode(true);
         track.appendChild(clone);
+    });
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
+
+    menuToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
     });
   </script>
 </body>
