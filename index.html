@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Epsilon Happy Bimbel</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3 {
+      color: #007d7b;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ===== Header ===== */
+    header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: linear-gradient(135deg, #009688, #4db6ac); /* gradasi tosca */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    }
+
+    header .logo img {
+    height: 60px;
+    }
+
+    header nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    }
+
+    header nav a {
+    font-weight: bold;
+    color: #fff; /* putih di background tosca */
+    padding-bottom: 4px; /* ruang untuk garis bawah */
+    transition: color 0.3s, border-color 0.3s;
+    border-bottom: 2px solid transparent; /* default transparan */
+    }
+
+    header nav a:hover,
+    header nav a:focus,
+    header nav a.active {
+    color: #ffb400; /* emas saat hover */
+    border-bottom: 2px solid #ffb400; /* garis bawah emas */
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+        display: flex;
+        justify-content: center;
+        align-items: center; /* ini yang bikin konten pas di tengah */
+        text-align: center;
+        height: 800px; /* lebih kecil biar pas sama gambar */
+        background-image: 
+            linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), 
+            url('banner1(2).jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 0 0 20px 20px;
+    }
+
+    .hero-content {
+        background: rgba(255, 255, 255, 0.85); /* ganti jadi putih transparan, lebih fresh */
+        padding: 30px 50px;
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .hero h1, .hero p {
+        color: #007d7b;
+        text-shadow: none; /* tidak perlu shadow karena sudah ada box putih */
+    }
+
+
+    .btn-primary {
+      display: inline-block;
+      background: #ffb400;
+      color: #333;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: #ffc933;
+    }
+
+    /* ===== Section ===== */
+    section {
+      padding: 60px 10%;
+    }
+
+    .program-container {
+        overflow: hidden;
+        max-width: 95%;
+        margin: auto;
+        position: relative;
+    }
+
+    .program-track {
+        display: flex;
+        gap: 24px;
+        animation: scrollLoop 28s linear infinite;
+        will-change: transform;
+    }
+
+    @keyframes scrollLoop {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+
+    /* Banner Program */
+    .program-banner {
+    text-align: center;
+    margin: 30px auto 50px;
+    }
+    .program-banner img {
+    max-width: 20%;
+    border-radius: 15px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    }
+
+    /* Card Program versi tosca */
+    .program-card {
+    flex: 0 0 320px;
+    background: linear-gradient(135deg, #009688, #4db6ac); /* gradasi tosca */
+    border: 2px solid #ffb400; /* border emas tipis */
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    color: #fff;
+    }
+
+    .program-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid #ffb400;
+    }
+
+    .program-content {
+    padding: 18px 20px 25px;
+    text-align: center;
+    }
+
+    .program-card h3 {
+    font-size: 1.3rem;
+    color: #ffb400; /* emas */
+    margin: 0 0 10px;
+    font-weight: 700;
+    }
+
+    .program-card p {
+    font-size: 1rem;
+    color: #fff; /* putih agar jelas */
+    line-height: 1.6;
+    }
+
+    .program-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 14px 35px rgba(0,150,136,0.4); /* glow tosca */
+    border-color: #ffd54f; /* emas lebih terang */
+    }
+
+    .lokasi-section {
+        position: relative;
+        background: linear-gradient(135deg, #ffffff 0%, #f7fefe 100%);
+        padding: 100px 10% 80px;
+        overflow: hidden;
+    }
+
+        /* Wave Divider Atas */
+    .lokasi-section::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background: url('wave-top.svg') no-repeat center;
+        background-size: cover;
+    }
+
+    .lokasi-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .lokasi-header h2 {
+        font-size: 2.6rem;
+        font-weight: 800;
+        color: #007d7b;
+        margin-bottom: 12px;
+    }
+
+    .lokasi-header p {
+        max-width: 720px;
+        margin: 0 auto;
+        font-size: 1.15rem;
+        color: #555;
+        line-height: 1.7;
+    }
+
+        /* Grid Card */
+    .lokasi-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 28px;
+        margin-bottom: 60px;
+    }
+
+    .lokasi-card {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 28px 22px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        opacity: 0;
+        transform: translateY(40px);
+        animation: fadeUp 0.8s ease forwards;
+    }
+
+    .lokasi-card:nth-child(1) { animation-delay: 0.2s; }
+    .lokasi-card:nth-child(2) { animation-delay: 0.4s; }
+
+    .lokasi-card h3 {
+        color: #ffb400;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .lokasi-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        color: #555;
+        line-height: 1.8;
+        font-size: 1.1rem;
+    }
+
+    .lokasi-card ul li {
+        transition: color 0.3s, transform 0.3s;
+    }
+    .lokasi-card ul li:hover {
+        color: #007d7b;
+        transform: translateX(8px);
+    }
+
+    .lokasi-card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+        /* Animasi */
+    @keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Map */
+    .lokasi-map {
+        text-align: center;
+    }
+
+    .lokasi-map h3 {
+        color: #007d7b;
+        font-size: 1.6rem;
+        margin-bottom: 18px;
+    }
+
+    .lokasi-map iframe {
+        border: 5px solid #fff;
+        border-radius: 18px;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 250px;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    /* ===== Keuntungan Section ===== */
+.keuntungan-section {
+  background: linear-gradient(135deg, #fdfdfd 0%, #f7fefe 100%);
+  padding: 100px 10% 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.keuntungan-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.keuntungan-header h2 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #007d7b;
+  margin-bottom: 12px;
+}
+
+.keuntungan-header p {
+  font-size: 1.2rem;
+  color: #555;
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.keuntungan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 28px;
+  margin-bottom: 60px;
+}
+
+.keuntungan-card {
+  background: linear-gradient(135deg, #009688, #4db6ac); /* gradasi tosca */
+  border: 2px solid #ffb400; /* border emas tipis */
+  border-radius: 20px;
+  padding: 30px 22px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  transition: all 0.4s ease;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 0.8s forwards;
+  color: #fff;
+}
+
+.keuntungan-card:nth-child(1){ animation-delay: 0.2s; }
+.keuntungan-card:nth-child(2){ animation-delay: 0.4s; }
+.keuntungan-card:nth-child(3){ animation-delay: 0.6s; }
+.keuntungan-card:nth-child(4){ animation-delay: 0.8s; }
+
+.keuntungan-card:hover {
+  transform: translateY(-12px) scale(1.05);
+  box-shadow: 0 14px 35px rgba(0, 150, 136, 0.4); /* glow tosca */
+  border-color: #ffd54f; /* emas lebih terang saat hover */
+}
+
+.keuntungan-card i {
+  font-size: 3rem;
+  color: #ffb400; /* emas */
+  margin-bottom: 15px;
+}
+
+.keuntungan-card h3 {
+  font-size: 1.3rem;
+  color: #ffb400; /* emas */
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.keuntungan-card p {
+  font-size: 1rem;
+  color: #fff; /* putih biar jelas */
+  line-height: 1.6;
+}
+
+/* Banner promosi */
+.keuntungan-banner {
+  text-align: center;
+  margin: 30px auto 50px; /* kasih jarak atas & bawah */
+}
+
+.keuntungan-banner img {
+  max-width: 20%;   /* dulu 100%, sekarang lebih kecil */
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+    /* ===== Form ===== */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    form input, form textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    form button {
+      background: #007d7b;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background: #009b96;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #007d7b;
+      color: white;
+      margin-top: 30px;
+    }
+
+  @media (max-width: 768px) {
+    /* Header */
+    header {
+        flex-wrap: wrap;
+        padding: 12px 20px;
+    }
+
+    header .logo img {
+        height: 50px;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    /* Hero */
+    .hero {
+        height: 550px;
+        padding: 0 20px;
+    }
+    .hero-content {
+        padding: 20px;
+    }
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+
+    /* Tentang */
+    #tentang {
+        flex-direction: column;
+        padding: 60px 5%;
+    }
+    #tentang img {
+        max-height: 300px;
+        object-fit: cover;
+    }
+
+    /* Program */
+    .program-container {
+        overflow-x: auto;
+    }
+    .program-track {
+        animation: none; /* matikan auto-scroll */
+        flex-wrap: nowrap;
+    }
+    .program-card {
+        flex: 0 0 80%;
+        margin-right: 15px;
+    }
+    .program-banner img {
+        max-width: 80%;
+    }
+
+    /* Keuntungan */
+    .keuntungan-header h2 {
+        font-size: 2rem;
+    }
+    .keuntungan-grid {
+        grid-template-columns: 1fr;
+    }
+    .keuntungan-banner img {
+        max-width: 60%;
+    }
+
+    /* Tim */
+    #tim {
+        padding: 60px 5%;
+    }
+    #tim h2 {
+        font-size: 2rem;
+    }
+
+    /* Lokasi */
+    .lokasi-header h2 {
+        font-size: 2rem;
+    }
+    .lokasi-cards {
+        grid-template-columns: 1fr;
+    }
+    .lokasi-map iframe {
+        height: 300px;
+    }
+
+    /* Hubungi */
+    #hubungi {
+        padding: 60px 5% 40px;
+    }
+    #hubungi > div {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    #hubungi img {
+        margin: auto;
+    }
+  }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <img src="logoEpsilon.jpg" alt="Epsilon Happy Bimbel Logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#program">Program</a></li>
+        <li><a href="#lokasi">Lokasi</a></li>
+        <li><a href="#keuntungan">Keuntungan</a></li>
+        <li><a href="#tim">Tim</a></li>
+        <li><a href="#hubungi">Hubungi Kami</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+        <h1>Selamat Datang di Epsilon Happy Bimbel 🎓</h1>
+        <p>Membantu siswa belajar dengan bahagia dan meraih prestasi terbaik!</p>
+        <a href="#program" class="btn-primary">Lihat Program Kami</a>
+    </div>
+  </section>
+
+  <!-- TENTANG -->
+  <section id="tentang" style="background:#ffffff; padding:80px 10%; display:flex; align-items:center; gap:40px; flex-wrap:wrap;">
+    <!-- KIRI: TEKS -->
+    <div style="flex:1; min-width:300px;">
+        <h2 style="font-size:2.2rem; margin-bottom:10px; color:#007d7b;">Tentang Kami</h2>
+        <h3 style="font-size:1.5rem; color:#ffb400; margin-top:0;">Epsilon Happy Bimbel</h3>
+        <p style="font-size:1.2rem; font-weight:bold; margin-bottom:20px;">"Cerdas, Ceria, Mulia"</p>
+        <p style="line-height:1.6; font-size:1.05rem;">
+        Epsilon Happy Bimbel adalah bimbingan belajar yang berdiri sejak 2020 dan telah terdaftar resmi di Dinas Pendidikan Banyuwangi. 
+        Kami percaya bahwa setiap anak berhak belajar dengan cara yang menyenangkan dan efektif. 
+        Dengan tutor berpengalaman (lulusan S1 & S2), kami membimbing siswa untuk memahami konsep dengan metode kreatif dan ramah anak.
+        </p>
+        <ul style="list-style: none; padding: 0; margin-top: 20px;">
+        <li style="margin-bottom: 10px;">✅ <strong>Kelas kecil</strong> — maksimal 5 siswa per kelas</li>
+        <li style="margin-bottom: 10px;">✅ <strong>Materi sesuai kurikulum</strong> dan update</li>
+        <li style="margin-bottom: 10px;">✅ <strong>Suasana belajar nyaman</strong> & interaktif</li>
+        </ul>
+        <a href="#program" style="display:inline-block; background:#ffb400; color:#333; padding:12px 25px; border-radius:25px; margin-top:20px; font-weight:bold; text-decoration:none;">Kenali Program Kami</a>
+    </div>
+
+    <!-- KANAN: FOTO -->
+    <div style="flex:1; min-width:300px; text-align:center;">
+        <img src="banner1.jpg" alt="Foto Bimbel" style="width:100%; border-radius:20px; box-shadow:0 4px 20px rgba(0,0,0,0.2);">
+    </div>
+  </section>
+
+  <!-- PROGRAM -->
+  <section id="program" style="background:linear-gradient(135deg, #f0fdfd, #ffffff); padding:80px 0;">
+    <div style="text-align:center; margin-bottom:60px;">
+        <h2 style="
+            font-size:2.8rem; 
+            font-weight:800; 
+            color:#007d7b; 
+            margin-bottom:15px; 
+            position:relative;
+            display:inline-block;">
+            ✨ Program Unggulan Kami ✨
+        </h2>
+        <p style="
+            max-width:750px; 
+            margin:0 auto; 
+            font-size:1.2rem; 
+            color:#555; 
+            line-height:1.7;">
+            Pilihan program belajar terbaik untuk semua jenjang. Dirancang dengan <b>metode kreatif</b>, 
+            <b>guru berpengalaman</b>, dan suasana belajar yang menyenangkan.
+        </p>
+    </div>
+
+    <!-- Banner Program -->
+    <div class="program-banner">
+        <img src="banner-program.jpg" alt="Banner Program Unggulan">
+    </div>
+
+    <div class="program-container">
+        <div class="program-track" id="programTrack">
+
+            <!-- CARD 1 -->
+            <div class="program-card">
+                <img src="program-calistung.jpg" alt="Bimbel Calistung">
+                <div class="program-content">
+                    <h3>Bimbel Calistung</h3>
+                    <p>Membaca, menulis, berhitung dengan metode seru & menyenangkan.</p>
+                </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="program-card">
+                <img src="program-olimpiade.jpg" alt="Olimpiade Matematika">
+                <div class="program-content">
+                    <h3>Olimpiade Matematika</h3>
+                    <p>Persiapan intensif & latihan soal untuk lomba matematika.</p>
+                </div>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="program-card">
+                <img src="program-mapel.jpg" alt="Bimbel Mapel">
+                <div class="program-content">
+                    <h3>Bimbel Mapel</h3>
+                    <p>Matematika, IPA, IPS, & Bahasa Inggris — sesuai kurikulum terbaru.</p>
+                </div>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="program-card">
+                <img src="program-cpns.jpg" alt="TKA & CPNS">
+                <div class="program-content">
+                    <h3>TKA & CPNS</h3>
+                    <p>Latihan soal TKA, PPPK, CPNS, & Kedinasan dengan pembahasan detail.</p>
+                </div>
+            </div>
+
+            <!-- CARD 5 -->
+            <div class="program-card">
+                <img src="program-komunikasi.jpg" alt="Bahasa Inggris & Arab">
+                <div class="program-content">
+                    <h3>Bahasa Inggris & Arab</h3>
+                    <p>Belajar komunikasi sehari-hari & grammar interaktif.</p>
+                </div>
+            </div>
+
+            <!-- CARD 6 -->
+            <div class="program-card">
+                <img src="program-tatabusana.jpg" alt="Tata Busana">
+                <div class="program-content">
+                    <h3>Tata Busana</h3>
+                    <p>Belajar menjahit & desain busana dengan pengajar profesional.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+  </section>
+
+  <!-- KEUNTUNGAN -->
+  <section id="keuntungan" class="keuntungan-section">
+    <div class="keuntungan-header">
+        <h2>🌟 Keuntungan Belajar di Epsilon</h2>
+        <p>
+        Kenapa memilih <b>Epsilon Happy Bimbel?</b>  
+        Karena kami menghadirkan pengalaman belajar yang efektif, menyenangkan, dan profesional.
+        </p>
+    </div>
+
+    <!-- Banner Promosi di Atas Grid -->
+    <div class="keuntungan-banner">
+        <img src="banner-keuntungan.jpg" alt="Banner Epsilon Happy Bimbel">
+    </div>
+
+    <div class="keuntungan-grid">
+        <div class="keuntungan-card">
+        <i>📘</i>
+        <h3>Metode Menyenangkan</h3>
+        <p>Belajar dengan cara kreatif & fun, membuat siswa lebih cepat paham.</p>
+        </div>
+
+        <div class="keuntungan-card">
+        <i>🎓</i>
+        <h3>Tutor Berpengalaman</h3>
+        <p>Dibimbing oleh tutor lulusan S1 & S2 yang sabar dan ahli.</p>
+        </div>
+
+        <div class="keuntungan-card">
+        <i>📖</i>
+        <h3>Materi Update</h3>
+        <p>Disesuaikan dengan kurikulum terbaru & kebutuhan siswa.</p>
+        </div>
+
+        <div class="keuntungan-card">
+        <i>👥</i>
+        <h3>Kelas Eksklusif</h3>
+        <p>Maksimal 5 siswa per kelas, fokus & perhatian lebih personal.</p>
+        </div>
+    </div>
+  </section>
+
+  <!-- TIM -->
+  <section id="tim" style="background:linear-gradient(135deg, #f9fdfd, #ffffff); padding:100px 10% 80px; text-align:center;">
+    <div style="margin-bottom:50px;">
+        <h2 style="font-size:2.8rem; font-weight:800; color:#007d7b; margin-bottom:15px;">
+            👩‍🏫 Tim Pengajar Epsilon
+        </h2>
+        <p style="max-width:780px; margin:0 auto; font-size:1.2rem; color:#555; line-height:1.7;">
+            Tim pengajar kami adalah <b>lulusan S1 & S2</b> yang berpengalaman, sabar, dan penuh dedikasi.  
+            Bersama mereka, siswa akan merasakan suasana belajar <span style="color:#ffb400;font-weight:bold;">ceria, efektif, dan inspiratif</span>.
+        </p>
+    </div>
+
+    <!-- Foto Tim -->
+    <div style="margin:40px auto; max-width:1000px;">
+        <img src="tim-pengajar.jpg" alt="Foto Tim Pengajar Epsilon" style="width:100%; border-radius:20px; box-shadow:0 6px 25px rgba(0,0,0,0.2);">
+    </div>
+
+    <!-- Kartu Keunggulan Tim -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:28px; margin-top:50px;">
+        
+        <div style="background:linear-gradient(135deg, #009688, #4db6ac); border:2px solid #ffb400; border-radius:18px; padding:30px 22px; color:#fff; box-shadow:0 6px 18px rgba(0,0,0,0.15); transition:all .3s;">
+            <h3 style="color:#ffb400; margin-bottom:12px;">🎓 Kompeten</h3>
+            <p>Tutor berpengalaman, lulusan terbaik dari berbagai universitas ternama.</p>
+        </div>
+
+        <div style="background:linear-gradient(135deg, #009688, #4db6ac); border:2px solid #ffb400; border-radius:18px; padding:30px 22px; color:#fff; box-shadow:0 6px 18px rgba(0,0,0,0.15); transition:all .3s;">
+            <h3 style="color:#ffb400; margin-bottom:12px;">💡 Inovatif</h3>
+            <p>Mengajar dengan metode kreatif agar siswa mudah memahami materi.</p>
+        </div>
+
+        <div style="background:linear-gradient(135deg, #009688, #4db6ac); border:2px solid #ffb400; border-radius:18px; padding:30px 22px; color:#fff; box-shadow:0 6px 18px rgba(0,0,0,0.15); transition:all .3s;">
+            <h3 style="color:#ffb400; margin-bottom:12px;">🤝 Ramah</h3>
+            <p>Menciptakan suasana belajar menyenangkan & penuh semangat.</p>
+        </div>
+
+        <div style="background:linear-gradient(135deg, #009688, #4db6ac); border:2px solid #ffb400; border-radius:18px; padding:30px 22px; color:#fff; box-shadow:0 6px 18px rgba(0,0,0,0.15); transition:all .3s;">
+            <h3 style="color:#ffb400; margin-bottom:12px;">🌟 Inspiratif</h3>
+            <p>Menjadi teladan & motivator bagi siswa untuk terus berprestasi.</p>
+        </div>
+    </div>
+  </section>
+
+  <!-- LOKASI -->
+  <section id="lokasi" class="lokasi-section">
+    <div class="lokasi-header">
+        <h2>📍 Lokasi Kami</h2>
+        <p>
+        Epsilon Happy Bimbel hadir di beberapa titik.  
+        Untuk info kelas <b>Reguler</b> & <b>Privat</b>, silakan lihat detail di bawah.
+        </p>
+    </div>
+
+    <div class="lokasi-cards">
+        <!-- Card Reguler -->
+        <div class="lokasi-card">
+        <h3>🏫 Kelas Reguler</h3>
+        <ul>
+            <li>📌 Rogojampi</li>
+            <li>📌 Genteng</li>
+            <li>📌 Banyuwangi</li>
+        </ul>
+        </div>
+
+        <!-- Card Privat -->
+        <div class="lokasi-card">
+        <h3>👩‍🏫 Kelas Privat</h3>
+        <ul>
+            <li>📌 Rogojampi</li>
+            <li>📌 Genteng</li>
+            <li>📌 Banyuwangi</li>
+            <li>📌 Srono</li>
+            <li>📌 Singojuruh</li>
+        </ul>
+        </div>
+    </div>
+
+    <div class="lokasi-map">
+        <h3>🗺️ Peta Lokasi Utama</h3>
+        <iframe
+        src="https://www.google.com/maps?q=LKP%20EPSILON%20HAPPY%20BIMBEL%20%26%20KONVEKSI%20GARDIEN%20GARMENT%2C%20Jl.%20Tawang%20Alun%20No.41%2C%20Pancoran%20Kulon%2C%20Rogojampi%2C%20Kabupaten%20Banyuwangi%2C%20Jawa%20Timur%2068462&output=embed"
+        width="100%" height="400" allowfullscreen="" loading="lazy">
+        </iframe>
+    </div>
+  </section>
+
+  <!-- HUBUNGI KAMI -->
+  <section id="hubungi" style="background:linear-gradient(135deg, #009688, #4db6ac); color:#fff; padding:80px 10% 60px; position:relative;">
+    <!-- Wave atas -->
+    <div style="position:absolute; top:-60px; left:0; width:100%; height:60px; background:url('wave-top-footer.svg') no-repeat center; background-size:cover;"></div>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:40px;">
+        
+        <!-- Logo & Motto -->
+        <div>
+        <img src="logoEpsilon.jpg" alt="Logo Epsilon" style="height:70px; margin-bottom:15px;">
+        <p style="font-size:1.1rem; line-height:1.6; color:#f9f9f9;">
+            <b style="color:#ffb400;">Epsilon Happy Bimbel</b> —  
+            "Cerdas, Ceria, Mulia" ✨  
+            Belajar menyenangkan & penuh prestasi.
+        </p>
+        </div>
+
+        <!-- Kontak -->
+        <div>
+            <h3 style="color:#ffb400; margin-bottom:15px;">📞 Kontak</h3>
+            <p>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffb400" viewBox="0 0 24 24" width="20" style="vertical-align:middle; margin-right:6px;">
+                <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.49 2.53.76 3.88.76.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.4 21 3 13.6 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.35.27 2.67.76 3.88.17.39.08.85-.21 1.11l-2.2 2.2z"/>
+                </svg>
+                <a href="https://wa.me/6282330447808" target="_blank" rel="noopener noreferrer" style="color:#fff;">+62 823-3044-7808</a>
+            </p>
+            <p>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffb400" viewBox="0 0 24 24" width="20" style="vertical-align:middle; margin-right:6px;">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                <a href="mailto:epsilonbimbel@gmail.com" target="_blank" rel="noopener noreferrer" style="color:#fff;">epsilonbimbel@gmail.com</a>
+            </p>
+            <p>📍 Rogojampi, Genteng, Banyuwangi</p>
+        </div>
+
+        <!-- Media Sosial -->
+        <div>
+            <h3 style="color:#ffb400; margin-bottom:15px;">🌐 Media Sosial</h3>
+            <p>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="20" style="vertical-align:middle; margin-right:6px;">
+                <radialGradient id="instaGradient" cx="30%" cy="107%" r="150%">
+                    <stop offset="0%" stop-color="#fdf497"/>
+                    <stop offset="25%" stop-color="#fdf497"/>
+                    <stop offset="50%" stop-color="#fd5949"/>
+                    <stop offset="75%" stop-color="#d6249f"/>
+                    <stop offset="100%" stop-color="#285AEB"/>
+                </radialGradient>
+                <path fill="url(#instaGradient)" d="M34.5 3h-19C8.5 3 3 8.5 3 15.5v19C3 41.5 8.5 47 15.5 47h19c7 0 12.5-5.5 12.5-12.5v-19C47 8.5 41.5 3 34.5 3zm-9.5 33c-6.6 0-12-5.4-12-12s5.4-12 12-12c6.6 0 12 5.4 12 12s-5.4 12-12 12zm12.3-21.5c-1.2 0-2.3-1-2.3-2.3s1-2.3 2.3-2.3c1.2 0 2.3 1 2.3 2.3s-1.1 2.3-2.3 2.3z"/>
+                <circle cx="25" cy="25" r="7.5" fill="#fff"/>
+                </svg>
+                <a href="https://instagram.com/epsilonhappybimbel" target="_blank" rel="noopener noreferrer" style="color:#fff;">@epsilonhappybimbel</a>
+            </p>
+            <p>👍 <a href="https://www.facebook.com/share/1CiWGmqoSN/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" style="color:#fff;">Facebook Page</a></p>
+            <p>▶️ <a href="https://www.youtube.com/@epsilonhappybimbel9637" target="_blank" rel="noopener noreferrer" style="color:#fff;">YouTube Channel</a></p>
+        </div>
+
+        <!-- Cabang -->
+        <div>
+        <h3 style="color:#ffb400; margin-bottom:15px;">📍 Cabang</h3>
+        <ul style="list-style:none; padding:0; margin:0; line-height:1.8;">
+            <li>🏫 Banyuwangi</li>
+            <li>🏫 Rogojampi</li>
+            <li>🏫 Genteng</li>
+            <li>🏫 Singojuruh</li>
+            <li>🏫 Cluring</li>
+            <li>🏫 Jajag</li>
+        </ul>
+        </div>
+    </div>
+
+    <!-- Divider -->
+    <hr style="margin:40px 0; border:0; border-top:1px solid rgba(255,255,255,0.3);">
+
+    <!-- Bawah Footer -->
+    <div style="text-align:center; font-size:0.95rem; color:#f1f1f1;">
+        © 2025 <b style="color:#ffb400;">Epsilon Happy Bimbel</b> | Semua Hak Dilindungi  
+    </div>
+  </section>
+
+  <script>
+    document.querySelector("form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Terima kasih! Pesan Anda telah dikirim.");
+      this.reset();
+    });
+    const track = document.getElementById('programTrack');
+    const cards = [...track.children]; // ambil semua card
+    cards.forEach(card => {
+        const clone = card.cloneNode(true);
+        track.appendChild(clone);
+    });
+  </script>
+</body>
+</html>
