@@ -95,46 +95,108 @@ header nav a.active {
 }
 
 /* ===== Hero ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Nunito:wght@400;600&display=swap');
+
 .hero {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 100vh; /* full screen */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url('banner1(2).jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 0 0 20px 20px;
+  min-height: 100vh;
   position: relative;
+  overflow: hidden;
+  border-radius: 0 0 20px 20px;
 }
 
+/* Video Background */
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* Lapisan gelap supaya teks terbaca */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%);
+  z-index: -1;
+}
+
+/* Konten di atas video */
 .hero-content {
-  margin-top: 60px; /* beri jarak sebesar tinggi header */
-  background: rgba(255, 255, 255, 0.85);
-  padding: 30px 50px;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+  max-width: 800px;
+  padding: 0 20px;
 }
 
-.hero h1, .hero p {
-  color: #A51D1D; /* maroon */
-  text-shadow: none;
+.hero-subtitle {
+  display: block;
+  font-size: 3rem;
+  letter-spacing: 3px;
+  color: #fff;
+  margin-bottom: 10px;
+  font-weight: 600;
 }
 
+.hero h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  color: #FFD700;
+  margin: 0 0 15px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+}
+
+.hero p {
+  font-size: 1.5rem;
+  font-family: 'Nunito', sans-serif;
+  color: #fff;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+
+/* Tombol */
 .btn-primary {
   display: inline-block;
-  background: #D4A017; /* aksen hangat */
-  color: #333;
-  padding: 10px 20px;
-  margin-top: 15px;
-  border-radius: 25px;
+  background: #A51D1D;
+  color: #fff;
+  padding: 14px 36px;
+  border-radius: 50px;
   font-weight: bold;
-  transition: background 0.3s;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .btn-primary:hover {
-  background: #E6C05C; /* aksen hover */
+  background: #7a1414;
+  transform: scale(1.05);
+}
+
+/* Navbar transparan */
+header nav {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  padding: 10px 0;
+}
+
+header nav a {
+  color: white !important;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+header nav a:hover {
+  color: #FFD700;
 }
 
 /* ===== Section ===== */
@@ -144,21 +206,19 @@ section {
 
 .program-container {
   overflow: hidden;
-  max-width: 95%;
-  margin: auto;
+  width: 100%;
   position: relative;
 }
 
 .program-track {
   display: flex;
-  gap: 24px;
-  animation: scrollLoop 28s linear infinite;
-  will-change: transform;
+  gap: 20px;
+  animation: scrollLoop 20s linear infinite;
 }
 
 @keyframes scrollLoop {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to { transform: translateX(-75%); }
 }
 
 /* Banner Program */
@@ -348,7 +408,6 @@ section {
 /* ===== Keuntungan Section ===== */
 .keuntungan-section {
   background: linear-gradient(135deg, #fdfdfd 0%, #f7fefe 100%);
-  padding: 100px ;
   position: relative;
   overflow: hidden;
 }
@@ -431,7 +490,7 @@ section {
 }
 
 .keuntungan-banner img {
-  max-width: 20%;
+  max-width: 25%;
   border-radius: 15px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
@@ -599,7 +658,7 @@ footer {
   }
 
   .keuntungan-banner img {
-    max-width: 60%;
+    max-width: 100%;
   }
 
   /* Tim */
@@ -668,10 +727,18 @@ footer {
 
   <!-- HERO SECTION -->
   <section class="hero">
+    <video autoplay muted loop playsinline class="hero-video">
+        <source src="videoHeader.mp4" type="video/mp4">
+        Browser Anda tidak mendukung video tag.
+    </video>
+
+    <div class="hero-overlay"></div>
+
     <div class="hero-content">
-        <h1>Selamat Datang di Epsilon Happy Bimbel</h1>
-        <p>Membantu siswa belajar dengan bahagia dan meraih prestasi terbaik!</p>
-        <a href="#program" class="btn-primary">Lihat Program Kami</a>
+        <span class="hero-subtitle">WELCOME TO</span>
+        <h1>Epsilon Happy Bimbel</h1>
+        <p>Membantu siswa belajar dengan bahagia dan meraih prestasi terbaik</p>
+        <a href="#program" class="btn-primary">Lihat Program</a>
     </div>
   </section>
 
@@ -735,164 +802,276 @@ footer {
 
             <!-- CARD 1 -->
             <div class="program-card">
-                <img src="program-calistung.jpg" alt="Bimbel Calistung">
-                <div class="program-content">
-                    <h3>Bimbel Calistung</h3>
-                    <p>Membaca, menulis, berhitung dengan metode seru & menyenangkan.</p>
-                </div>
+            <img src="program-calistung.jpg" alt="Bimbel Calistung">
+            <div class="program-content">
+                <h3>Bimbel Calistung</h3>
+                <p>Belajar membaca, menulis, dan berhitung dengan cara seru dan penuh permainan agar anak semangat belajar.</p>
+            </div>
             </div>
 
             <!-- CARD 2 -->
             <div class="program-card">
-                <img src="program-olimpiade.jpg" alt="Olimpiade Matematika">
-                <div class="program-content">
-                    <h3>Olimpiade Matematika</h3>
-                    <p>Persiapan intensif & latihan soal untuk lomba matematika.</p>
-                </div>
+            <img src="program-private-reguler-sd.jpg" alt="Bimbel SD">
+            <div class="program-content">
+                <h3>Bimbel Private & Reguler SD</h3>
+                <p>Matematika, IPA, dan Bahasa Inggris dengan metode interaktif dan latihan soal yang menyenangkan.</p>
+            </div>
             </div>
 
             <!-- CARD 3 -->
             <div class="program-card">
-                <img src="program-mapel.jpg" alt="Bimbel Mapel">
-                <div class="program-content">
-                    <h3>Bimbel Mapel</h3>
-                    <p>Matematika, IPA, IPS, & Bahasa Inggris — sesuai kurikulum terbaru.</p>
-                </div>
+            <img src="program-private-reguler-smp.jpg" alt="Bimbel SMP">
+            <div class="program-content">
+                <h3>Bimbel Private & Reguler SMP</h3>
+                <p>Bimbingan belajar untuk semua mata pelajaran dengan pembahasan yang mudah dipahami.</p>
+            </div>
             </div>
 
             <!-- CARD 4 -->
             <div class="program-card">
-                <img src="program-cpns.jpg" alt="TKA & CPNS">
-                <div class="program-content">
-                    <h3>TKA & CPNS</h3>
-                    <p>Latihan soal TKA, PPPK, CPNS, & Kedinasan dengan pembahasan detail.</p>
-                </div>
+            <img src="program-private-reguler-sma.jpg" alt="Bimbel SMA">
+            <div class="program-content">
+                <h3>Bimbel Private & Reguler SMA</h3>
+                <p>Persiapan ujian sekolah dan UTBK dengan strategi belajar efektif & guru berpengalaman.</p>
+            </div>
             </div>
 
             <!-- CARD 5 -->
             <div class="program-card">
-                <img src="program-komunikasi.jpg" alt="Bahasa Inggris & Arab">
-                <div class="program-content">
-                    <h3>Bahasa Inggris & Arab</h3>
-                    <p>Belajar komunikasi sehari-hari & grammar interaktif.</p>
-                </div>
+            <img src="program-snbt-tka.jpg" alt="Bimbel SNBT / TKA">
+            <div class="program-content">
+                <h3>Bimbel SNBT / TKA</h3>
+                <p>Latihan soal dan tryout rutin untuk menghadapi ujian masuk perguruan tinggi dengan percaya diri.</p>
+            </div>
             </div>
 
             <!-- CARD 6 -->
             <div class="program-card">
+            <img src="program-komunikasi-english.jpg" alt="Bimbel Bahasa Inggris">
+            <div class="program-content">
+                <h3>Bimbel Komunikasi Bahasa Inggris</h3>
+                <p>Belajar speaking, listening, dan grammar secara natural agar percaya diri berkomunikasi sehari-hari.</p>
+            </div>
+            </div>
+
+            <!-- CARD 7 -->
+            <div class="program-card">
+            <img src="program-komunikasi-arab.jpg" alt="Bimbel Bahasa Arab">
+            <div class="program-content">
+                <h3>Bimbel Komunikasi Bahasa Arab</h3>
+                <p>Belajar percakapan sehari-hari dengan cara praktis dan menyenangkan untuk semua usia.</p>
+            </div>
+            </div>
+
+            <!-- CARD 8 -->
+            <div class="program-card">
+            <img src="program-olimpiade.jpg" alt="Olimpiade Matematika">
+            <div class="program-content">
+                <h3>Olimpiade Matematika</h3>
+                <p>Program intensif untuk persiapan lomba matematika dengan latihan soal dan pembahasan mendalam.</p>
+            </div>
+            </div>
+
+            <!-- CARD 10 -->
+            <div class="program-card">
                 <img src="program-tatabusana.jpg" alt="Tata Busana">
                 <div class="program-content">
                     <h3>Tata Busana</h3>
-                    <p>Belajar menjahit & desain busana dengan pengajar profesional.</p>
+                    <p>Belajar menjahit dan desain busana dari dasar hingga mahir bersama pengajar berpengalaman.</p>
                 </div>
             </div>
 
+
+            <!-- CARD 11 -->
             <div class="program-card">
-                <img src="program-calistung.jpg" alt="Bimbel Calistung">
+                <img src="program-cpns.jpg" alt="CPNS">
                 <div class="program-content">
-                    <h3>Bimbel Calistung</h3>
-                    <p>Membaca, menulis, berhitung dengan metode seru & menyenangkan.</p>
+                    <h3>Bimbel CPNS & Kedinasan</h3>
+                    <p>Latihan soal TKA, PPPK, CPNS & Kedinasan lengkap dengan pembahasan agar siap menghadapi tes.</p>
                 </div>
+            </div>
+            
+            <!-- CARD 1 -->
+            <div class="program-card">
+            <img src="program-calistung.jpg" alt="Bimbel Calistung">
+            <div class="program-content">
+                <h3>Bimbel Calistung</h3>
+                <p>Belajar membaca, menulis, dan berhitung dengan cara seru dan penuh permainan agar anak semangat belajar.</p>
+            </div>
             </div>
 
             <!-- CARD 2 -->
             <div class="program-card">
-                <img src="program-olimpiade.jpg" alt="Olimpiade Matematika">
-                <div class="program-content">
-                    <h3>Olimpiade Matematika</h3>
-                    <p>Persiapan intensif & latihan soal untuk lomba matematika.</p>
-                </div>
+            <img src="program-private-reguler-sd.jpg" alt="Bimbel SD">
+            <div class="program-content">
+                <h3>Bimbel Private & Reguler SD</h3>
+                <p>Matematika, IPA, dan Bahasa Inggris dengan metode interaktif dan latihan soal yang menyenangkan.</p>
+            </div>
             </div>
 
             <!-- CARD 3 -->
             <div class="program-card">
-                <img src="program-mapel.jpg" alt="Bimbel Mapel">
-                <div class="program-content">
-                    <h3>Bimbel Mapel</h3>
-                    <p>Matematika, IPA, IPS, & Bahasa Inggris — sesuai kurikulum terbaru.</p>
-                </div>
+            <img src="program-private-reguler-smp.jpg" alt="Bimbel SMP">
+            <div class="program-content">
+                <h3>Bimbel Private & Reguler SMP</h3>
+                <p>Bimbingan belajar untuk semua mata pelajaran dengan pembahasan yang mudah dipahami.</p>
+            </div>
             </div>
 
             <!-- CARD 4 -->
             <div class="program-card">
-                <img src="program-cpns.jpg" alt="TKA & CPNS">
-                <div class="program-content">
-                    <h3>TKA & CPNS</h3>
-                    <p>Latihan soal TKA, PPPK, CPNS, & Kedinasan dengan pembahasan detail.</p>
-                </div>
+            <img src="program-private-reguler-sma.jpg" alt="Bimbel SMA">
+            <div class="program-content">
+                <h3>Bimbel Private & Reguler SMA</h3>
+                <p>Persiapan ujian sekolah dan UTBK dengan strategi belajar efektif & guru berpengalaman.</p>
+            </div>
             </div>
 
             <!-- CARD 5 -->
             <div class="program-card">
-                <img src="program-komunikasi.jpg" alt="Bahasa Inggris & Arab">
-                <div class="program-content">
-                    <h3>Bahasa Inggris & Arab</h3>
-                    <p>Belajar komunikasi sehari-hari & grammar interaktif.</p>
-                </div>
+            <img src="program-snbt-tka.jpg" alt="Bimbel SNBT / TKA">
+            <div class="program-content">
+                <h3>Bimbel SNBT / TKA</h3>
+                <p>Latihan soal dan tryout rutin untuk menghadapi ujian masuk perguruan tinggi dengan percaya diri.</p>
+            </div>
             </div>
 
             <!-- CARD 6 -->
             <div class="program-card">
+            <img src="program-komunikasi-english.jpg" alt="Bimbel Bahasa Inggris">
+            <div class="program-content">
+                <h3>Bimbel Komunikasi Bahasa Inggris</h3>
+                <p>Belajar speaking, listening, dan grammar secara natural agar percaya diri berkomunikasi sehari-hari.</p>
+            </div>
+            </div>
+
+            <!-- CARD 7 -->
+            <div class="program-card">
+            <img src="program-komunikasi-arab.jpg" alt="Bimbel Bahasa Arab">
+            <div class="program-content">
+                <h3>Bimbel Komunikasi Bahasa Arab</h3>
+                <p>Belajar percakapan sehari-hari dengan cara praktis dan menyenangkan untuk semua usia.</p>
+            </div>
+            </div>
+
+            <!-- CARD 8 -->
+            <div class="program-card">
+            <img src="program-olimpiade.jpg" alt="Olimpiade Matematika">
+            <div class="program-content">
+                <h3>Olimpiade Matematika</h3>
+                <p>Program intensif untuk persiapan lomba matematika dengan latihan soal dan pembahasan mendalam.</p>
+            </div>
+            </div>
+
+            <!-- CARD 10 -->
+            <div class="program-card">
                 <img src="program-tatabusana.jpg" alt="Tata Busana">
                 <div class="program-content">
                     <h3>Tata Busana</h3>
-                    <p>Belajar menjahit & desain busana dengan pengajar profesional.</p>
+                    <p>Belajar menjahit dan desain busana dari dasar hingga mahir bersama pengajar berpengalaman.</p>
                 </div>
             </div>
 
+
+            <!-- CARD 11 -->
             <div class="program-card">
-                <img src="program-calistung.jpg" alt="Bimbel Calistung">
+                <img src="program-cpns.jpg" alt="CPNS">
                 <div class="program-content">
-                    <h3>Bimbel Calistung</h3>
-                    <p>Membaca, menulis, berhitung dengan metode seru & menyenangkan.</p>
+                    <h3>Bimbel CPNS & Kedinasan</h3>
+                    <p>Latihan soal TKA, PPPK, CPNS & Kedinasan lengkap dengan pembahasan agar siap menghadapi tes.</p>
                 </div>
+            </div>
+
+            <!-- CARD 1 -->
+            <div class="program-card">
+            <img src="program-calistung.jpg" alt="Bimbel Calistung">
+            <div class="program-content">
+                <h3>Bimbel Calistung</h3>
+                <p>Belajar membaca, menulis, dan berhitung dengan cara seru dan penuh permainan agar anak semangat belajar.</p>
+            </div>
             </div>
 
             <!-- CARD 2 -->
             <div class="program-card">
-                <img src="program-olimpiade.jpg" alt="Olimpiade Matematika">
-                <div class="program-content">
-                    <h3>Olimpiade Matematika</h3>
-                    <p>Persiapan intensif & latihan soal untuk lomba matematika.</p>
-                </div>
+            <img src="program-private-reguler-sd.jpg" alt="Bimbel SD">
+            <div class="program-content">
+                <h3>Bimbel Private & Reguler SD</h3>
+                <p>Matematika, IPA, dan Bahasa Inggris dengan metode interaktif dan latihan soal yang menyenangkan.</p>
+            </div>
             </div>
 
             <!-- CARD 3 -->
             <div class="program-card">
-                <img src="program-mapel.jpg" alt="Bimbel Mapel">
-                <div class="program-content">
-                    <h3>Bimbel Mapel</h3>
-                    <p>Matematika, IPA, IPS, & Bahasa Inggris — sesuai kurikulum terbaru.</p>
-                </div>
+            <img src="program-private-reguler-smp.jpg" alt="Bimbel SMP">
+            <div class="program-content">
+                <h3>Bimbel Private & Reguler SMP</h3>
+                <p>Bimbingan belajar untuk semua mata pelajaran dengan pembahasan yang mudah dipahami.</p>
+            </div>
             </div>
 
             <!-- CARD 4 -->
             <div class="program-card">
-                <img src="program-cpns.jpg" alt="TKA & CPNS">
-                <div class="program-content">
-                    <h3>TKA & CPNS</h3>
-                    <p>Latihan soal TKA, PPPK, CPNS, & Kedinasan dengan pembahasan detail.</p>
-                </div>
+            <img src="program-private-reguler-sma.jpg" alt="Bimbel SMA">
+            <div class="program-content">
+                <h3>Bimbel Private & Reguler SMA</h3>
+                <p>Persiapan ujian sekolah dan UTBK dengan strategi belajar efektif & guru berpengalaman.</p>
+            </div>
             </div>
 
             <!-- CARD 5 -->
             <div class="program-card">
-                <img src="program-komunikasi.jpg" alt="Bahasa Inggris & Arab">
-                <div class="program-content">
-                    <h3>Bahasa Inggris & Arab</h3>
-                    <p>Belajar komunikasi sehari-hari & grammar interaktif.</p>
-                </div>
+            <img src="program-snbt-tka.jpg" alt="Bimbel SNBT / TKA">
+            <div class="program-content">
+                <h3>Bimbel SNBT / TKA</h3>
+                <p>Latihan soal dan tryout rutin untuk menghadapi ujian masuk perguruan tinggi dengan percaya diri.</p>
+            </div>
             </div>
 
             <!-- CARD 6 -->
             <div class="program-card">
+            <img src="program-komunikasi-english.jpg" alt="Bimbel Bahasa Inggris">
+            <div class="program-content">
+                <h3>Bimbel Komunikasi Bahasa Inggris</h3>
+                <p>Belajar speaking, listening, dan grammar secara natural agar percaya diri berkomunikasi sehari-hari.</p>
+            </div>
+            </div>
+
+            <!-- CARD 7 -->
+            <div class="program-card">
+            <img src="program-komunikasi-arab.jpg" alt="Bimbel Bahasa Arab">
+            <div class="program-content">
+                <h3>Bimbel Komunikasi Bahasa Arab</h3>
+                <p>Belajar percakapan sehari-hari dengan cara praktis dan menyenangkan untuk semua usia.</p>
+            </div>
+            </div>
+
+            <!-- CARD 8 -->
+            <div class="program-card">
+            <img src="program-olimpiade.jpg" alt="Olimpiade Matematika">
+            <div class="program-content">
+                <h3>Olimpiade Matematika</h3>
+                <p>Program intensif untuk persiapan lomba matematika dengan latihan soal dan pembahasan mendalam.</p>
+            </div>
+            </div>
+
+            <!-- CARD 10 -->
+            <div class="program-card">
                 <img src="program-tatabusana.jpg" alt="Tata Busana">
                 <div class="program-content">
                     <h3>Tata Busana</h3>
-                    <p>Belajar menjahit & desain busana dengan pengajar profesional.</p>
+                    <p>Belajar menjahit dan desain busana dari dasar hingga mahir bersama pengajar berpengalaman.</p>
                 </div>
             </div>
 
+
+            <!-- CARD 11 -->
+            <div class="program-card">
+                <img src="program-cpns.jpg" alt="CPNS">
+                <div class="program-content">
+                    <h3>Bimbel CPNS & Kedinasan</h3>
+                    <p>Latihan soal TKA, PPPK, CPNS & Kedinasan lengkap dengan pembahasan agar siap menghadapi tes.</p>
+                </div>
+            </div>
         </div>
     </div>
   </section>
